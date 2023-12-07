@@ -1,42 +1,21 @@
 using Levels;
 using Storage;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Controllers
 {
     public class LevelManager : MonoBehaviour
     {
+        public enum GameState { Ready, Start,XLine, Finish }
+
         #region DELEGATE
 
-        public delegate void LevelLoadHandler(Level levelData);
-
-        public delegate void LevelStartHandler(Level levelData);
-
-        public delegate void LevelStageCompleteHandler(Level levelData, int stageIndex = 0);
-
-        public delegate void LevelCompleteHandler(Level levelData);
-
-        public delegate void LevelFailHandler(Level levelData);
-
-        #endregion
-
-        #region EVENTS
-
-        
-        public static LevelLoadHandler OnLevelLoad;
-
-        
-        public static LevelStartHandler OnLevelStart;
-
-        
-        public static LevelStageCompleteHandler OnLevelStageComplete;
-
-        
-        public static LevelCompleteHandler OnLevelComplete;
-
-       
-        public static LevelFailHandler OnLevelFail;
-
+        public static UnityAction<Level> OnLevelLoad;
+        public static UnityAction<Level> OnLevelStart;
+        public static UnityAction<Level> OnLevelComplete;
+        public static UnityAction<Level> OnLevelStageComplete;
+        public static UnityAction<Level> OnLevelFail;
         #endregion
 
         #region PUBLIC FIELDS / PROPS
@@ -47,6 +26,7 @@ namespace Controllers
 
         #region SERIALIZE PRIVATE FIELDS
 
+        [SerializeField] private GameState gameState = GameState.Ready;
         [SerializeField] private LevelSource levelSource;
 
         [SerializeField] private GameObject levelSpawnPoint;
@@ -96,37 +76,38 @@ namespace Controllers
 
         #region PUBLIC METHODS
 
-        
+
         public void LevelLoad()
         {
             _activeLevel = Instantiate(GetLevel(), levelSpawnPoint.transform, false);
             OnLevelLoad?.Invoke(_activeLevel.GetComponent<Level>());
         }
 
-        
+
         public void LevelStart()
         {
             OnLevelStart?.Invoke(_activeLevel.GetComponent<Level>());
+            gameState = GameState.Start;
         }
 
-        
-        public void LevelStageComplete(int stageIndex = 0)
+        public void LevelStageComplete()
         {
-            OnLevelStageComplete?.Invoke(_activeLevel.GetComponent<Level>(), stageIndex);
+            OnLevelStageComplete?.Invoke(_activeLevel.GetComponent<Level>());
+            gameState = GameState.XLine;
         }
 
-       
+
         public void LevelComplete()
         {
             PlayerPrefsController.SetLevelIndex(PlayerPrefsController.GetLevelIndex() + 1);
 
             PlayerPrefsController.SetLevelNumber(PlayerPrefsController.GetLevelNumber() + 1);
 
-
             OnLevelComplete?.Invoke(_activeLevel.GetComponent<Level>());
+            gameState = GameState.Finish;
         }
 
-       
+
         public void LevelFail()
         {
             OnLevelFail?.Invoke(_activeLevel.GetComponent<Level>());
@@ -139,7 +120,8 @@ namespace Controllers
         private void Awake()
         {
             CheckRepeatLevelIndex();
-            Instance = this;
+            if (!Instance)
+                Instance = this;
         }
 
         private void Start() => LevelLoad();

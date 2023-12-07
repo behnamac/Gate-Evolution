@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1956679455330153705}
   - component: {fileID: 7884589559084478704}
   - component: {fileID: 2341986574110970132}
-  - component: {fileID: 6303829281364981169}
+  - component: {fileID: 3056618785795922411}
   m_Layer: 0
   m_Name: GoodCollectable
   m_TagString: Collectable
@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0.486, z: -5.8}
   m_LocalScale: {x: 0.72174835, y: 0.72174835, z: 0.72174835}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -96,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6303829281364981169
+--- !u!114 &3056618785795922411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,8 +107,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8967966521460831023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98929d481a0acf245900a82c1cbfbc89, type: 3}
+  m_Script: {fileID: 11500000, guid: cc37e45328ee8ab4fbe7f6826914dd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectValue: 1
-  canDestroy: 1

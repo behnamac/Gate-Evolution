@@ -23,7 +23,7 @@ namespace Controllers
         [SerializeField] private GameObject levelCompletePanel;
         [SerializeField] private GameObject levelFailPanel;
         [SerializeField] private GameObject tutorialPanel;
-        
+
         [SerializeField] private Text coinText;
         [SerializeField] private Text levelFinishCoinText;
 
@@ -88,7 +88,7 @@ namespace Controllers
             tutorialPanel.SetActive(false);
         }
 
-        
+
 
         private void ShowLevelCompletePanel()
         {
@@ -125,7 +125,7 @@ namespace Controllers
 
             coinText.text = totalCoin.ToString();
 
-            
+
         }
 
         public void LevelFinishCoinCount(int coinCount)
@@ -136,8 +136,8 @@ namespace Controllers
             levelFinishCoinText.text = _levelFinishTotalCount.ToString();
         }
 
-        
-        
+
+
 
         #endregion
 
@@ -161,7 +161,6 @@ namespace Controllers
 
         private void OnLevelStageComplete(Level levelData, int stageIndex)
         {
-            // TODO : IF DONT NEED THIS METHODS, YOU DONT REMOVE
         }
 
         #endregion
@@ -180,7 +179,6 @@ namespace Controllers
             LevelManager.OnLevelStart += OnLevelStart;
             LevelManager.OnLevelComplete += OnLevelComplete;
             LevelManager.OnLevelFail += OnLevelFail;
-            LevelManager.OnLevelStageComplete += OnLevelStageComplete;
         }
 
 
@@ -189,7 +187,6 @@ namespace Controllers
             LevelManager.OnLevelStart -= OnLevelStart;
             LevelManager.OnLevelComplete -= OnLevelComplete;
             LevelManager.OnLevelFail -= OnLevelFail;
-            LevelManager.OnLevelStageComplete -= OnLevelStageComplete;
         }
 
         #endregion
