@@ -1,22 +1,24 @@
+using Elementary.Scripts.Data.Management;
 using Levels;
-using Storage;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Controllers
 {
     public class LevelManager : MonoBehaviour
     {
-        public enum GameState { Ready, Start,XLine, Finish }
-
         #region DELEGATE
 
-        public static UnityAction<Level> OnLevelLoad;
-        public static UnityAction<Level> OnLevelStart;
-        public static UnityAction<Level> OnLevelComplete;
-        public static UnityAction<Level> OnLevelStageComplete;
-        public static UnityAction<Level> OnLevelFail;
+        public Action<Level> OnLevelLoad;
+
+        public Action<Level> OnLevelStart;
+
+        public Action<Level> OnLevelComplete;
+
+        public Action<Level> OnLevelFail;
+
         #endregion
+
 
         #region PUBLIC FIELDS / PROPS
 
@@ -26,7 +28,6 @@ namespace Controllers
 
         #region SERIALIZE PRIVATE FIELDS
 
-        [SerializeField] private GameState gameState = GameState.Ready;
         [SerializeField] private LevelSource levelSource;
 
         [SerializeField] private GameObject levelSpawnPoint;
@@ -40,6 +41,9 @@ namespace Controllers
         #region PRIVATE FIELDS
 
         private GameObject _activeLevel;
+        private SOLevelData _saveData;
+
+
 
         #endregion
 
@@ -53,61 +57,82 @@ namespace Controllers
 
         private GameObject GetLevel()
         {
-            if (PlayerPrefsController.GetLevelIndex() >= levelSource.levelData.Length)
+            var levelIndex = _saveData.LevelIndex;
+            if (levelIndex >= levelSource.levelData.Length)
             {
                 if (loopLevelGetRandom)
                 {
-                    var levelIndex = Random.Range(loopLevelsStartIndex, levelSource.levelData.Length - 1);
-                    PlayerPrefsController.SetLevelIndex(levelIndex);
+                    var randomLevelIndex = UnityEngine.Random.Range(loopLevelsStartIndex, levelSource.levelData.Length - 1);
+                    _saveData.LevelIndex = randomLevelIndex;
                 }
             }
 
-            var level = levelSource.levelData[PlayerPrefsController.GetLevelIndex()];
+            var level = levelSource.levelData[levelIndex];
 
             var levelData = level.GetComponent<Level>();
 
-            levelData.levelIndex = PlayerPrefsController.GetLevelIndex();
-            levelData.levelNumber = PlayerPrefsController.GetLevelNumber();
-
+            levelData.levelIndex = levelIndex;
+            levelData.levelNumber = levelIndex + 1;
+            SaveData();
             return level;
+        }
+
+
+        private void HandleLoadData()
+        {
+            var loadedData = DataManager.GetWithJson<SOLevelData>();
+            if (loadedData == null)
+            {
+                _saveData = new SOLevelData()
+                {
+                    LevelIndex = 0,
+                };
+
+                SaveData();
+            }
+            else
+                _saveData = loadedData;
+        }
+
+        private void SaveData()
+        {
+            DataManager.SaveWithJson(_saveData);
         }
 
         #endregion
 
         #region PUBLIC METHODS
 
-
+        /// <summary>
+        ///     Method that loads the next level
+        /// </summary>
         public void LevelLoad()
         {
             _activeLevel = Instantiate(GetLevel(), levelSpawnPoint.transform, false);
             OnLevelLoad?.Invoke(_activeLevel.GetComponent<Level>());
         }
 
-
+        /// <summary>
+        ///     Method that starts the last loaded level
+        /// </summary>
         public void LevelStart()
         {
             OnLevelStart?.Invoke(_activeLevel.GetComponent<Level>());
-            gameState = GameState.Start;
         }
 
-        public void LevelStageComplete()
-        {
-            OnLevelStageComplete?.Invoke(_activeLevel.GetComponent<Level>());
-            gameState = GameState.XLine;
-        }
 
 
         public void LevelComplete()
         {
-            PlayerPrefsController.SetLevelIndex(PlayerPrefsController.GetLevelIndex() + 1);
-
-            PlayerPrefsController.SetLevelNumber(PlayerPrefsController.GetLevelNumber() + 1);
-
+            _saveData.LevelIndex += 1;
+            SaveData();
             OnLevelComplete?.Invoke(_activeLevel.GetComponent<Level>());
-            gameState = GameState.Finish;
         }
 
 
+        /// <summary>
+        ///     The method to be called when the level played fails.
+        /// </summary>
         public void LevelFail()
         {
             OnLevelFail?.Invoke(_activeLevel.GetComponent<Level>());
@@ -119,9 +144,9 @@ namespace Controllers
 
         private void Awake()
         {
+            HandleLoadData();
             CheckRepeatLevelIndex();
-            if (!Instance)
-                Instance = this;
+            Instance = this;
         }
 
         private void Start() => LevelLoad();

@@ -4,16 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FinishLine
-  - Collectable
-  - BadCollectable
-  - GoodCollectable
-  - X
+  - Gate
+  - Money
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 

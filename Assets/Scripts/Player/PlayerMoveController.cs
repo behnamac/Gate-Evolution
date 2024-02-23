@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerMoveController : MonoBehaviour, IActor
+    public class PlayerMoveController : AbstractPlayerMoveController
     {
         #region PRIVATE FIELDS
 
@@ -12,91 +12,62 @@ namespace Player
         private bool _isHorizontalMoveLock;
         private float _mouseXStartPosition;
         private float _swipeDelta;
-        private SOPlayerParameters _playerParameters;
-        private float forwardSpeed;
-        private float horizontalSpeed;
-        private float maximumHorizontalPosition;
-
-        #endregion
-
-        #region Interface METHODS
-
-        public void HorizontalMoveControl()
-        {
-            if (_isHorizontalMoveLock) return;
-
-            if (Input.GetMouseButtonDown(0))
-                _mouseXStartPosition = Input.mousePosition.x;
-
-            if (Input.GetMouseButton(0))
-            {
-                _swipeDelta = Input.mousePosition.x - _mouseXStartPosition;
-                _mouseXStartPosition = Input.mousePosition.x;
-            }
-
-            if (Input.GetMouseButtonUp(0))
-                _swipeDelta = 0;
-
-            transform.position = HorizontalPosition(transform.position, _swipeDelta);
-        }
-
-        private Vector3 HorizontalPosition(Vector3 targetPosition, float swipeDelta)
-        {
-            var xDirection = Time.deltaTime * swipeDelta * horizontalSpeed;
-            var position = targetPosition;
-            var xPos = Mathf.Clamp(
-                position.x + xDirection,
-                maximumHorizontalPosition * -1,
-                maximumHorizontalPosition);
-            position = new Vector3(xPos, position.y, position.z);
-            return position;
-        }
-
-        public void Movement()
-        {
-            transform.Translate(0, 0, forwardSpeed * Time.deltaTime);
-        }
-
-        public void StartRun()
-        {
-            _isMove = true;
-        }
-        public void StopRun()
-        {
-            _isMove = false;
-        }
-
-        public void StopHorizontalControl(bool controlIsLock = true)
-        {
-            _isHorizontalMoveLock = controlIsLock;
-        }
-
 
         #endregion
 
         #region PRIVATE METHODS
 
-        private void Initialized()
+        private void Move()
         {
-            _playerParameters = Instantiate(Resources.Load("PlayerSetting")) as SOPlayerParameters;
-            SetParameters(_playerParameters);
-        }
-
-        private void SetParameters(SOPlayerParameters parameter)
-        {
-            forwardSpeed = parameter.forwardSpeed;
-            horizontalSpeed = parameter.horizontalSpeed;
-            maximumHorizontalPosition = parameter.maximumHorizontalPosition;
+            transform.position += transform.forward * Time.deltaTime * forwardSpeed;
         }
 
         #endregion
 
-        #region Action METHODS           
+        #region PUBLIC METHODS
 
-        private void OnLevelStart(Level levelData)
+        public override void HorizontalMoveControl()
         {
-            StartRun();
+            if (_isHorizontalMoveLock) return;
+
+            // MOUSE DOWN
+            if (Input.GetMouseButtonDown(0)) _mouseXStartPosition = Input.mousePosition.x;
+
+            // MOUSE ON PRESS
+            if (Input.GetMouseButton(0))
+            {
+                if (!playerAnimator.GetBool(moveParameterName)) playerAnimator.SetBool(moveParameterName, true);
+
+                _swipeDelta = Input.mousePosition.x - _mouseXStartPosition;
+                _mouseXStartPosition = Input.mousePosition.x;
+            }
+
+            // MOUSE UP
+            if (Input.GetMouseButtonUp(0)) _swipeDelta = 0;
+
+            transform.position = HorizontalPosition(transform.position, _swipeDelta);
         }
+
+        public override void StartRun()
+        {
+            _isMove = true;
+
+            playerAnimator.SetBool(moveParameterName, true);
+        }
+
+        public override void StopRun()
+        {
+            _isMove = false;
+            playerAnimator.SetBool(moveParameterName, false);
+        }
+
+        public override void StopHorizontalControl(bool controlIsLock = true) => _isHorizontalMoveLock = controlIsLock;
+
+        #endregion
+
+        #region CUSTOM EVENT METHODS
+
+        private void OnLevelStart(Level levelData) => StartRun();
 
         private void OnLevelFail(Level levelData)
         {
@@ -104,11 +75,7 @@ namespace Player
             StopHorizontalControl();
         }
 
-        private void OnLevelStageComplete(Level levelData)
-        {
-            forwardSpeed *= 3;
-            StopHorizontalControl();
-        }
+        private void OnLevelStageComplete(Level levelData, int stageIndex) => StopHorizontalControl();
 
         private void OnLevelComplete(Level levelData)
         {
@@ -120,36 +87,31 @@ namespace Player
 
         #region UNITY EVENT METHODS
 
-        private void Awake()
+        protected override void OnComponentStart()
         {
-            Initialized();
+            base.OnComponentStart();
+            LevelManager.Instance.OnLevelStart += OnLevelStart;
+            LevelManager.Instance.OnLevelFail += OnLevelFail;
+            LevelManager.Instance.OnLevelComplete += OnLevelComplete;
         }
 
-        private void Update()
+        protected override void OnComponentUpdate()
         {
+            base.OnComponentUpdate();
+
             if (!_isMove) return;
-            Movement();
+            Move();
             HorizontalMoveControl();
         }
 
-        private void OnEnable()
+        protected override void OnComponentDestroy()
         {
-            LevelManager.OnLevelStart += OnLevelStart;
-            LevelManager.OnLevelFail += OnLevelFail;
-            LevelManager.OnLevelComplete += OnLevelComplete;
-            LevelManager.OnLevelStageComplete += OnLevelStageComplete;
-        }
-
-        private void OnDestroy()
-        {
-            LevelManager.OnLevelStart -= OnLevelStart;
-            LevelManager.OnLevelFail -= OnLevelFail;
-            LevelManager.OnLevelComplete -= OnLevelComplete;
-            LevelManager.OnLevelStageComplete -= OnLevelStageComplete;
-
+            base.OnComponentDestroy();
+            LevelManager.Instance.OnLevelStart -= OnLevelStart;
+            LevelManager.Instance.OnLevelFail -= OnLevelFail;
+            LevelManager.Instance.OnLevelComplete -= OnLevelComplete;
         }
 
         #endregion
-
     }
 }

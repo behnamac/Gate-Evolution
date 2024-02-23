@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using Player;
 using UnityEngine;
 
@@ -16,6 +18,8 @@ namespace Controllers
         [SerializeField] private bool xPositionLock;
         [SerializeField] private bool isTargetLook;
 
+        [Tooltip("This parameter needs to AbstractPlayerMoveController on target component!")]
+        [SerializeField] private bool setPlayerFollowSpeed;
 
         #endregion
 
@@ -24,10 +28,25 @@ namespace Controllers
         private void Initialize()
         {
             // SET DEFAULT OFFSET
-            offset = transform.position - target.position;          
+            offset = transform.position - target.position;
+
+            // SET FOLLOW SPEED FROM TARGET
+            SetAutomaticFollowSpeed();
         }
 
-       
+        private void SetAutomaticFollowSpeed()
+        {
+            if (!setPlayerFollowSpeed) return;
+
+            var playerMoveController = FindObjectOfType<AbstractPlayerMoveController>();
+            if (playerMoveController == null)
+            {
+                Debug.LogError("CAMERA CONTROLLER : Cannot find AbstractPlayerMoveController on the target");
+                return;
+            }
+
+            followSpeed = playerMoveController.forwardSpeed;
+        }
 
         private void SmoothFollow()
         {

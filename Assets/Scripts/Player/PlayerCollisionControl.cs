@@ -1,12 +1,16 @@
+using System;
 using UnityEngine;
-using Collectable;
-using Controllers;
 
 namespace Player
 {
     public class PlayerCollisionControl : MonoBehaviour
     {
         #region PRIVATE FIELDS
+
+        #endregion
+
+        #region PRIVATE METHODS
+
         #endregion
 
         #region UNITY EVENT METHODS
@@ -14,12 +18,27 @@ namespace Player
         // TRIGGER EVENTS
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Triggable item))
-                item.PerformCollect();
+            throw new NotImplementedException();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            throw new NotImplementedException();
         }
 
 
-        #endregion       
+        // COLLISION EVENTS
 
+        private void OnCollisionEnter(Collision other)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
