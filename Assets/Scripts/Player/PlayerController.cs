@@ -11,24 +11,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public ConditionCloth conditionCloth;
     [HideInInspector] public ClothType thisCloth;
 
-    [Header("Movement")]
-    [Tooltip("Player speed to move on the Z axis")]
-    [SerializeField] float speedForward;
-    [Tooltip("Player speed to move on the X axis")]
-    [SerializeField] float speedHorizontal;
-    [Tooltip("Player speed in X way")]
-    [SerializeField] float speedXWay;
-    [Tooltip("The position of the player on the X axis does not exceed this number")]
-    public float minX;
-    [Tooltip("The position of the player on the X axis does not exceed this number")]
-    public float maxX;
-
-    [Header("Money Controller")]
-    [Tooltip("The amount that is added to the money each time")]
-    [SerializeField] int addMoneyValue;
-    int currntAddMoney;
-    [Tooltip("This is the amount of money the player has at the beginning of the game")]
-    [SerializeField] int firstMoney;
 
     [Header("Sexynest Controller")]
     [SerializeField, Range(0, 1)] float choiceBadGate;
@@ -43,13 +25,8 @@ public class PlayerController : MonoBehaviour
     Dictionary<ClothType, ClothController> clothDic;
 
     Animator[] anim;
-    Transform finishLine;
 
-    float move;
-    int currentLevelNumber;
-    float firstXPos;
-    float firstSpeed;
-    bool finish;
+
     private void Awake()
     {
         Instance = this;
@@ -63,20 +40,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManagerld.OnStart += StartMove;
-       // GameManager.InGame += Movement;
-        GameManagerld.OnWin += Win;
-        GameManagerld.OnLose += Lose;
-        GameManagerld.OnReset += OnResetLevel;
-        GameManagerld.Instance.SetMoney(firstMoney);
-
-        UIManagerOld.Instance.UpdateSexynestBar();
+ 
         HeaderUpTheHead.Instance.ChangeClothText(clothDic[ClothType.Neutral].clothType.ToString());
 
-        anim = GetComponentsInChildren<Animator>();
-        finishLine = GameObject.FindGameObjectWithTag("Finish").transform;
 
-        currntAddMoney = addMoneyValue;
 
         for (int i = 0; i < clothController.Length; i++)
             clothController[i].SetActive(false);
@@ -84,8 +51,7 @@ public class PlayerController : MonoBehaviour
         clothDic[ClothType.Neutral].SetActive(true);
 
         nextClothValue = 0.25f;
-        firstXPos = transform.position.x;
-        firstSpeed = speedForward;
+
     }
     //It is called once when the start key is pressed
     void StartMove() 
@@ -95,21 +61,7 @@ public class PlayerController : MonoBehaviour
             anim[i].SetBool("Move", true);
     }
     //After pressing the start key, each frame is called
-    /*void Movement() 
-    {
-        if (CameraFollow.Instance.cameraType == CameraType.Front && !finish)
-            move = -UIManager.Instance.joystick.HorizontalInput();
-        if (CameraFollow.Instance.cameraType == CameraType.Back && !finish)
-            move = UIManager.Instance.joystick.HorizontalInput();
-        transform.Translate(move * speedHorizontal * Time.deltaTime, 0, speedForward * Time.deltaTime);
-        Vector3 newPos = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), transform.position.y, transform.position.z);
-        transform.position = newPos;
-        for (int i = 0; i < anim.Length; i++)
-        {
-            anim[i].SetFloat("Horizontal", move);
-        }
-    }*/
-    //Called once after winning
+
     void Win() 
     {
         for (int i = 0; i < anim.Length; i++)
@@ -120,37 +72,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //Called once after losing
-    void Lose() 
-    {
-
-    }
-
-    void Upgrade() 
-    {
-        GameManagerld.Instance.Upgrade();
-        currentLevelNumber = 0;
-    }
     void Sexynest(float getValue) 
     {
         currentSexynest += getValue;
         currentSexynest = Mathf.Clamp01(currentSexynest);
-        UIManagerOld.Instance.UpdateSexynestBar();
     }
 
-    //It is called when the player hits an game object with a money tag
-    void SetMoney(Collider MoneyHit) 
-    {
-        GameManagerld.Instance.SetMoney(currntAddMoney * GameManagerld.Instance.levelNumber);
-        currentLevelNumber += currntAddMoney;
 
-        if (currentLevelNumber >= GameManagerld.Instance.moneyForUpgrade)
-            Upgrade();
-
-        Destroy(MoneyHit.gameObject);
-    }
-
-    //It is called when the player hits an game object with a gate tag
     [System.Obsolete]
     void SetCloth(ClothType clothName)
     {
@@ -195,7 +123,6 @@ public class PlayerController : MonoBehaviour
         HeaderUpTheHead.Instance.UpdateHotBar(currentSexynest / nextClothValue);
         sexynetText.color = Color.red;
         Invoke("HideSexynetText", 1);
-        UIManagerOld.Instance.UpdateSexynestBar();
     }
     void UpHot(float value) 
     {
@@ -217,7 +144,6 @@ public class PlayerController : MonoBehaviour
         HeaderUpTheHead.Instance.UpdateHotBar(currentSexynest / nextClothValue);
         sexynetText.color = Color.green;
         Invoke("HideSexynetText", 1);
-        UIManagerOld.Instance.UpdateSexynestBar();
     }
     void HideSexynetText() 
     {
@@ -230,21 +156,13 @@ public class PlayerController : MonoBehaviour
         ParticleManager.PlayParticle("Money", new Vector3(transform.position.x, transform.position.y + 4.5f, transform.position.z), Quaternion.Euler(-90, 0, 0));
 
         currentSexynest -= 0.1005f;
-        GameManagerld.Instance.SetXAmount();
-        UIManagerOld.Instance.UpdateSexynestBar();
 
         if (currentSexynest <= 0) 
         {
-            GameManagerld.Instance.Win();
         }
-        if (!finish) 
-        {
-            StartCoroutine(GoToCenterLine());
-            finish = true;
-            move = 0;
-        }
+    
     }
-    IEnumerator GoToCenterLine() 
+   /* IEnumerator GoToCenterLine() 
     {
         while (GameManagerld.Instance.conditionGame == ConditionGame.InGame)
         {
@@ -256,55 +174,9 @@ public class PlayerController : MonoBehaviour
                 anim[i].SetFloat("MoveSpeed", speedXWay / firstSpeed);
             }
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Money")) 
-        {
-            SetMoney(other);
-        }
-        if (other.gameObject.CompareTag("Gate"))
-        {
-            if (GameManagerld.Instance.moneyNumber >= other.GetComponent<GateController>().dataGate.clothPrice * GameManagerld.Instance.levelNumber)
-            {
-                if (other.GetComponent<GateController>().gateType == GateType.Good)
-                    UpHot(choiceGoodGate);
-                if (other.GetComponent<GateController>().gateType == GateType.Bad)
-                    DownHot(choiceBadGate);
-                GameManagerld.Instance.SetMoney(-other.GetComponent<GateController>().dataGate.clothPrice * GameManagerld.Instance.levelNumber);
-
-                other.GetComponent<GateController>().DestroyCloth();
-                ParticleManager.PlayParticle("destroyCloth", new Vector3(transform.position.x, transform.position.y + 3.5f, transform.position.z + 1), Quaternion.identity);
-
-            }
-            else
-                DownHot(choiceBadGate);
-        }
-        if (other.gameObject.CompareTag("+Collectible"))
-        {
-            UpHot(0.05f);
-            Destroy(other.gameObject);
-        }
-        if (other.gameObject.CompareTag("-Collectible"))
-        {
-            DownHot(0.05f);
-            Destroy(other.gameObject);
-        }
-        if (other.gameObject.CompareTag("X")) 
-        {
-            SetXAmount();
-        }
-    }
-
-    void OnResetLevel() 
-    {
-        GameManagerld.OnStart -= StartMove;
-       // GameManager.InGame -= Movement;
-        GameManagerld.OnWin -= Win;
-        GameManagerld.OnLose -= Lose;
-        GameManagerld.OnReset -= OnResetLevel;
-    }
+    }*/    
+ 
+       
 }
 [System.Serializable]
 public class ClothController 

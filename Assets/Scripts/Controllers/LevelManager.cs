@@ -1,6 +1,7 @@
 using Elementary.Scripts.Data.Management;
 using Levels;
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace Controllers
@@ -35,6 +36,8 @@ namespace Controllers
         [SerializeField] private int loopLevelsStartIndex = 1;
 
         [SerializeField] private bool loopLevelGetRandom = true;
+
+        [SerializeField] private TextMeshProUGUI levelText;
 
         #endregion
 
@@ -74,6 +77,7 @@ namespace Controllers
             levelData.levelIndex = levelIndex;
             levelData.levelNumber = levelIndex + 1;
             SaveData();
+            levelText.text = "LEVEL " + levelData.levelNumber.ToString();
             return level;
         }
 

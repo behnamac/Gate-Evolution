@@ -25,9 +25,9 @@ public class GateController : MonoBehaviour
 
        // meshs = p.GetComponentsInChildren<MeshRenderer>();
 
-        itemePriceText.text = "$ " + (dataGate.clothPrice * GameManagerld.Instance.levelNumber);
-        GameManagerld.OnUpgrade += SetPriceText;
-        GameManagerld.OnReset += ResetLevel;
+       // itemePriceText.text = "$ " + (dataGate.clothPrice * GameManagerld.Instance.levelNumber);
+       // GameManagerld.OnUpgrade += SetPriceText;
+       // GameManagerld.OnReset += ResetLevel;
     }
 
     public void SetMaterials(Material material, GateType type)
@@ -46,7 +46,7 @@ public class GateController : MonoBehaviour
     
     void SetPriceText()
     {
-        itemePriceText.text = "$ " + (dataGate.clothPrice * GameManagerld.Instance.levelNumber);
+       // itemePriceText.text = "$ " + (dataGate.clothPrice * GameManagerld.Instance.levelNumber);
     }
 
     public void DestroyCloth() 
@@ -57,7 +57,7 @@ public class GateController : MonoBehaviour
 
     void ResetLevel() 
     {
-        GameManagerld.OnUpgrade -= SetPriceText;
-        GameManagerld.OnReset -= ResetLevel;
+      // GameManagerld.OnUpgrade -= SetPriceText;
+       // GameManagerld.OnReset -= ResetLevel;
     }
 }

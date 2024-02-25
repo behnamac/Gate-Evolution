@@ -75,7 +75,6 @@ namespace Player
             StopHorizontalControl();
         }
 
-        private void OnLevelStageComplete(Level levelData, int stageIndex) => StopHorizontalControl();
 
         private void OnLevelComplete(Level levelData)
         {

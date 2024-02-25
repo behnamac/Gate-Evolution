@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Levels;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,17 +28,15 @@ namespace Controllers
         [Header("Coin")]
         [SerializeField] private Image coinIcon;
 
-        [SerializeField] private Text coinText;
 
-        [Header("Level")]
-        [SerializeField] private Text levelText;
+       
 
 
         [Header("Settings Value")]
         [SerializeField] private int hideTutorialLevelIndex;
         [SerializeField] private float levelCompletePanelShowDelayTime;
         [SerializeField] private float levelFailPanelShowDelayTime;
-        [SerializeField] private ScoreManager scoreManager;
+        [SerializeField] private SOMoneyData money;
 
         #endregion
 
@@ -51,11 +50,7 @@ namespace Controllers
 
         private void Initializer()
         {
-            //Load GameManager
-            if (!scoreManager)
-            {
-                scoreManager = FindAnyObjectByType<ScoreManager>();
-            }
+            
             // Level Start
             levelStartPanel.GetComponentInChildren<Button>().onClick.AddListener(() =>
             {
@@ -75,8 +70,7 @@ namespace Controllers
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             });
 
-            // Set TotalCoin;
-           // coinText.text = scoreManager.GetScore().ToString();
+          
 
             // Set Level Number
            // var levelNumber = LevelManager.Instance.GetLevelNumber() + 1;
