@@ -1666,8 +1666,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 4
-  horizontalSpeed: 15
-  maximumHorizontalPosition: 3.5
+  horizontalSpeed: 2
+  maximumHorizontalPosition: 1.5
+  minimumHorizontalPosition: 3.6
   player: {fileID: 891342118}
   playerAnimator: {fileID: 891342125}
   moveParameterName: Move

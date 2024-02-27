@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class MoneyController : MonoBehaviour
 {
+    public static MoneyController Instance { get; private set; }    
     [SerializeField] private TextMeshProUGUI coinText;
     private SOMoneyData moneyData;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         HandleLoadData();
     }
 
@@ -17,7 +23,7 @@ public class MoneyController : MonoBehaviour
      
     }
 
-    private void SetCoin(int value)
+    public void SetCoin(int value)
     {
         moneyData.Money = value;
         // Set TotalCoin;

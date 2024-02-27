@@ -72,8 +72,8 @@ public class PeopleController : MonoBehaviour
     public void Throw()
     {
         //Throw
-        Vector3 targetThrow = new Vector3(randomPos, PlayerController.Instance.transform.position.y, transform.position.z + amountOfForwardThrow);
-        Vector3 VO = CalculateVelocity(targetThrow, throwingSpawnPoint.position, 1);
+       // Vector3 targetThrow = new Vector3(randomPos, PlayerController.Instance.transform.position.y, transform.position.z + amountOfForwardThrow);
+     //   Vector3 VO = CalculateVelocity(targetThrow, throwingSpawnPoint.position, 1);
        /* for (int i = 0; i < GameManagerld.Instance.levelNumber; i++)
         {
             if (i == 0)
@@ -87,7 +87,7 @@ public class PeopleController : MonoBehaviour
                 m.GetComponent<RotateMoney>().enabled = false;
             }
         }*/
-        money.velocity = VO;
+       // money.velocity = VO;
 
         if (peopleType == PeopleType.TrowMoneyAndCheer)
             Cheer();
@@ -96,7 +96,7 @@ public class PeopleController : MonoBehaviour
     [System.Obsolete]
     void Cheer() 
     {
-        if (PlayerController.Instance.conditionCloth == ConditionCloth.progress)
+      /*  if (PlayerController.Instance.conditionCloth == ConditionCloth.progress)
         {
             anim.SetTrigger("Like");
             anim.SetInteger("RandomLike", Random.Range(0, 7));
@@ -108,7 +108,7 @@ public class PeopleController : MonoBehaviour
             anim.SetInteger("RandomDislike", Random.Range(0, 5));
             ParticleManager.PlayParticle("EmojiSad", new Vector3(transform.position.x, transform.position.y + 3.5f, transform.position.z), Quaternion.Euler(-90, 0, 0));
         }
-        StartCoroutine(LookAt(PlayerController.Instance.transform.position));
+        StartCoroutine(LookAt(PlayerController.Instance.transform.position));*/
     }
 
     IEnumerator LookAt(Vector3 target) 

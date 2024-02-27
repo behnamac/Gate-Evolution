@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectable : ITriggerable
+public class Collectable : MonoBehaviour, ITriggerable
 {
-    [SerializeField] private float scoreValue;
+    [SerializeField] private float scoreToGain;
 
 
     public void TriggerAction()
     {
-        GameManager.Instance.OnCollect?.Invoke(scoreValue);
+        ScoreController.Instance.SetScore(scoreToGain);
     }
 }

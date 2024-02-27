@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ScoreController : MonoBehaviour
 {
+    public static ScoreController Instance { get; private set; }
     [SerializeField] private Image scoreBar;
     private SOScoreData scoreData;
     private float maxScore = 1;
@@ -11,6 +12,10 @@ public class ScoreController : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
         HandleLoadData();
         changeState = GetComponent<ChangeState>();
     }
@@ -21,7 +26,7 @@ public class ScoreController : MonoBehaviour
     }
 
 
-    private void SetScore(float value)
+    public void SetScore(float value)
     {
         scoreData.Score = value;
         scoreBar.fillAmount = scoreData.Score / maxScore;

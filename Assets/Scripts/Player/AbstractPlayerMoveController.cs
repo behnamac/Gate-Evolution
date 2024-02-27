@@ -11,6 +11,7 @@ namespace Player
 
         public float horizontalSpeed;
         public float maximumHorizontalPosition;
+        public float minimumHorizontalPosition;
 
         [Header("PLAYER")]
         public GameObject player;
@@ -51,7 +52,7 @@ namespace Player
             var position = targetPosition;
             var xPos = Mathf.Clamp(
                 position.x + xDirection,
-                maximumHorizontalPosition * -1,
+                -minimumHorizontalPosition,
                 maximumHorizontalPosition);
 
             position = new Vector3(xPos, position.y, position.z);

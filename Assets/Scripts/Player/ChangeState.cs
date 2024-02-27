@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class ChangeState : MonoBehaviour
 {
-    
-
-
-
     public void CheckPlayerLevel()
     {
 

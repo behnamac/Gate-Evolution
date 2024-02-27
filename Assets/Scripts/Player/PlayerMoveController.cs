@@ -1,5 +1,6 @@
 using Controllers;
 using Levels;
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -21,6 +22,33 @@ namespace Player
         {
             transform.position += transform.forward * Time.deltaTime * forwardSpeed;
         }
+
+        private void WinDance()
+        {
+
+            playerAnimator.SetBool("Move", false);
+            playerAnimator.SetTrigger("Dance");
+            playerAnimator.SetInteger("RandomDance", Random.Range(0, 4));
+
+        }
+
+        private void GoToCenterLine()
+        {
+           // StartCoroutine(GoToCenterLineCO());
+        }
+        /*private IEnumerator GoToCenterLineCO()
+        {
+        *//*    while (GameManagerld.Instance.conditionGame == ConditionGame.InGame)
+            {
+                yield return new WaitForEndOfFrame();
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(firstXPos, transform.position.y, transform.position.z), 2 * Time.deltaTime);
+                speedForward = speedXWay;
+                for (int i = 0; i < anim.Length; i++)
+                {
+                    anim[i].SetFloat("MoveSpeed", speedXWay / firstSpeed);
+                }
+            }*//*
+        }*/
 
         #endregion
 
