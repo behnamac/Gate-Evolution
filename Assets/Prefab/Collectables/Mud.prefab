@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4607789667203969970}
   - component: {fileID: 1736150709338290917}
   - component: {fileID: 6077808424409657139}
+  - component: {fileID: 7986509234964728559}
   m_Layer: 0
   m_Name: Mud
   m_TagString: Untagged
@@ -136,8 +137,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.79320544, y: 0.09881687, z: 1.1430105}
-  m_Center: {x: 0, y: -0.0023955107, z: 0.000000059604645}
+  m_Size: {x: 0.79320544, y: 0.27419078, z: 1.1430105}
+  m_Center: {x: 0, y: 0.13595515, z: 0.000000059604645}
 --- !u!114 &6077808424409657139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +152,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDuration: 1
+--- !u!114 &7986509234964728559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8855450403743924957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc895f9dbd2b004a9a1470c3a815244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreToGain: -0.4

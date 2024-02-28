@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour, ITriggerable
 {
-    [SerializeField] private float scoreToGain;
+    [SerializeField] private float scoreToGain=0.2f;
 
 
     public void TriggerAction()
     {
-        ScoreController.Instance.SetScore(scoreToGain);
+        GameManager.Instance.OnCollect?.Invoke(scoreToGain);
+        Destroy(gameObject);
     }
 }

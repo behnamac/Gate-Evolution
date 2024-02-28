@@ -8,6 +8,7 @@ public class CollecableSpawner : MonoBehaviour
     [SerializeField] private int numberOfCollectibles;
     [SerializeField] private float distanceBetweenCollectibles = 5;
     [SerializeField] private float offset = 2;
+    [SerializeField] private Transform spawnPoint;
     private Vector3 spawnPosition;
 
     private void OnEnable()
@@ -25,15 +26,15 @@ public class CollecableSpawner : MonoBehaviour
             int _xRandom = GetRandom(0, 2);
             if (_xRandom == 0)
             {
-                spawnPosition = transform.position + transform.forward * distanceCovered;
+                spawnPosition = spawnPoint.position + transform.forward * distanceCovered;
             }
             else
             {
-                spawnPosition = transform.position + transform.forward * (distanceCovered) + transform.right * offset;
+                spawnPosition = spawnPoint.position + transform.forward * (distanceCovered) + transform.right * offset;
             }
             int random = GetRandom(0, collectiblePrefab.Length);
 
-            Instantiate(collectiblePrefab[random], spawnPosition, Quaternion.identity, transform);
+            Instantiate(collectiblePrefab[random], spawnPosition, Quaternion.identity, spawnPoint);
 
             distanceCovered += distanceBetweenCollectibles;
 

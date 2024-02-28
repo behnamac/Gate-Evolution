@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1190477829958558294}
   - component: {fileID: 6758037930806472204}
   - component: {fileID: 2019269885198620775}
+  - component: {fileID: 3467799253124172648}
   m_Layer: 0
   m_Name: Money
   m_TagString: Untagged
@@ -96,6 +97,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDuration: 1
+--- !u!114 &3467799253124172648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265191444812737969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a851a653c91e41246adeace3c2cfbe08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyToGain: 10
 --- !u!1 &2250758294148723932
 GameObject:
   m_ObjectHideFlags: 0

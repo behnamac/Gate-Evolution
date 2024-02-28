@@ -16,6 +16,7 @@ public class DataGate : ScriptableObject
 
     [Tooltip("This variable indicates what cloth this gate is going to give to the player. From inside the Prefabs folder, you can assign an item of sprite to this variable.")]
     public Transform spriteCloth;
+
     [Tooltip("This variable specifies the value of the cloth")]
     public int clothPrice;
 }

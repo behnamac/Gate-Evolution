@@ -6,5 +6,6 @@ public class MoneyCollectable :MonoBehaviour, ITriggerable
     public void TriggerAction()
     {
         MoneyController.Instance.SetCoin(moneyToGain);
+        Destroy(gameObject);
     }
 }

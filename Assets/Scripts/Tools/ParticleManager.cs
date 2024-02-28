@@ -17,10 +17,9 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-    [System.Obsolete]
     public static void PlayParticle(string n, Vector3 pos, Quaternion Rot)
     {
-        Instantiate(instance.particleDic[n].particleObj[Random.RandomRange(0, instance.particleDic[n].particleObj.Length - 1)], pos, Rot);
+        Instantiate(instance.particleDic[n].particleObj[Random.Range(0, instance.particleDic[n].particleObj.Length - 1)], pos, Rot);
     }
 }
 [System.Serializable]

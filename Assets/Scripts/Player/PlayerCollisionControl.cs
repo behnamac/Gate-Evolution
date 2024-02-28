@@ -14,5 +14,13 @@ namespace Player
                 component.TriggerAction();
             }
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.TryGetComponent(out ITriggerable component))
+            {
+                component.TriggerAction();
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7150141330055274576}
   - component: {fileID: 4701444802612300332}
   - component: {fileID: -1509827128807599824}
+  - component: {fileID: 189193738218484881}
   m_Layer: 0
   m_Name: Listick
   m_TagString: Untagged
@@ -68,6 +69,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDuration: 1
+--- !u!114 &189193738218484881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788960287793165830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc895f9dbd2b004a9a1470c3a815244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreToGain: 0.4
 --- !u!1 &7454744647901375984
 GameObject:
   m_ObjectHideFlags: 0
