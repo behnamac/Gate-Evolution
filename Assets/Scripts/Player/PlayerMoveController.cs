@@ -2,6 +2,7 @@ using Controllers;
 using Levels;
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 namespace Player
 {
@@ -13,6 +14,13 @@ namespace Player
         private bool _isHorizontalMoveLock;
         private float _mouseXStartPosition;
         private float _swipeDelta;
+        private float firstXPos;
+        private readonly string MOVE_PARAM = "Move";
+        private readonly string DANCE_PARAM = "Dance";
+        private readonly string SPIN_PARAM = "Spine";
+        private readonly string RANDOM_DANCE_PARAM = "RandomDance";
+
+
 
         #endregion
 
@@ -26,29 +34,28 @@ namespace Player
         private void WinDance()
         {
 
-            playerAnimator.SetBool("Move", false);
-            playerAnimator.SetTrigger("Dance");
-            playerAnimator.SetInteger("RandomDance", Random.Range(0, 4));
+            playerAnimator.SetBool(MOVE_PARAM, false);
+            playerAnimator.SetTrigger(DANCE_PARAM);
+            playerAnimator.SetInteger(RANDOM_DANCE_PARAM, Random.Range(0, 4));
 
+        }
+
+        private void OnUpgrade()
+        {
+            playerAnimator.SetTrigger(SPIN_PARAM);
         }
 
         private void GoToCenterLine()
         {
-           // StartCoroutine(GoToCenterLineCO());
+            StartCoroutine(GoToCenterLineCO());
         }
-        /*private IEnumerator GoToCenterLineCO()
-        {
-        *//*    while (GameManagerld.Instance.conditionGame == ConditionGame.InGame)
-            {
-                yield return new WaitForEndOfFrame();
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(firstXPos, transform.position.y, transform.position.z), 2 * Time.deltaTime);
-                speedForward = speedXWay;
-                for (int i = 0; i < anim.Length; i++)
-                {
-                    anim[i].SetFloat("MoveSpeed", speedXWay / firstSpeed);
-                }
-            }*//*
-        }*/
+        private IEnumerator GoToCenterLineCO()
+        {          
+            yield return new WaitForEndOfFrame();
+            transform.DOMoveX(firstXPos, 2);
+            forwardSpeed *= 2;
+            _isHorizontalMoveLock = true;
+        }
 
         #endregion
 
@@ -64,7 +71,7 @@ namespace Player
             // MOUSE ON PRESS
             if (Input.GetMouseButton(0))
             {
-                if (!playerAnimator.GetBool(moveParameterName)) playerAnimator.SetBool(moveParameterName, true);
+                if (!playerAnimator.GetBool(MOVE_PARAM)) playerAnimator.SetBool(MOVE_PARAM, true);
 
                 _swipeDelta = Input.mousePosition.x - _mouseXStartPosition;
                 _mouseXStartPosition = Input.mousePosition.x;
@@ -80,13 +87,14 @@ namespace Player
         {
             _isMove = true;
 
-            playerAnimator.SetBool(moveParameterName, true);
+            playerAnimator.SetBool(MOVE_PARAM, true);
+            firstXPos = transform.position.x;
         }
 
         public override void StopRun()
         {
             _isMove = false;
-            playerAnimator.SetBool(moveParameterName, false);
+            playerAnimator.SetBool(MOVE_PARAM, false);
         }
 
         public override void StopHorizontalControl(bool controlIsLock = true) => _isHorizontalMoveLock = controlIsLock;
@@ -120,6 +128,8 @@ namespace Player
             LevelManager.Instance.OnLevelStart += OnLevelStart;
             LevelManager.Instance.OnLevelFail += OnLevelFail;
             LevelManager.Instance.OnLevelComplete += OnLevelComplete;
+            GameManager.Instance.OnUpgrade += OnUpgrade;
+            GameManager.Instance.OnReachToFInishLine += GoToCenterLine;
         }
 
         protected override void OnComponentUpdate()
@@ -137,6 +147,8 @@ namespace Player
             LevelManager.Instance.OnLevelStart -= OnLevelStart;
             LevelManager.Instance.OnLevelFail -= OnLevelFail;
             LevelManager.Instance.OnLevelComplete -= OnLevelComplete;
+            GameManager.Instance.OnUpgrade -= OnUpgrade;
+            GameManager.Instance.OnReachToFInishLine -= GoToCenterLine;
         }
 
         #endregion

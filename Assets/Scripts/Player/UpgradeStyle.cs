@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UpgradeStyle : MonoBehaviour
@@ -16,13 +14,13 @@ public class UpgradeStyle : MonoBehaviour
 
         currentStyle += index;
 
-        currentStyle = Mathf.Clamp(currentStyle, 0, levelTypes.Length);
+        currentStyle = Mathf.Clamp(currentStyle, 0, levelTypes.Length-1);
 
         SetModel(currentStyle);
 
         Vector3 spawnPos = transform.position + Vector3.up * offset;
-
         ParticleManager.PlayParticle(LEVELUP_PARICLE, spawnPos, Quaternion.identity);
+
     }
 
     public string GetStyleName()
@@ -44,11 +42,6 @@ public class UpgradeStyle : MonoBehaviour
 
         levelTypes[index].Model.gameObject.SetActive(true);
     }
-
-
-
-
-
 
 
     [System.Serializable]

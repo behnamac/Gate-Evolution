@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,11 +6,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Action<float> OnCollect;
+    public Action OnUpgrade;
+    public Action OnReachToFInishLine;
 
     private void Awake()
     {
-
-        Instance = this;
+        if (!Instance)
+            Instance = this;
 
     }
+   
+
 }

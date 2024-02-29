@@ -1,6 +1,5 @@
 using Controllers;
 using Levels;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,12 +72,14 @@ public class GameProgressTracker : MonoBehaviour
             currentLevel = 0;
             int _levelUp = 1;
             upgradeStyle.UpgradeCharacter(_levelUp);
+            GameManager.Instance.OnUpgrade?.Invoke();
         }
-        if (currentLevel < 0)
+        else if (currentLevel < 0)
         {
             currentLevel = 0;
             int _levelDown = -1;
             upgradeStyle.UpgradeCharacter(_levelDown);
+            GameManager.Instance.OnUpgrade?.Invoke();
         }
 
         stateBar.fillAmount = currentLevel / maxLevel;

@@ -18,8 +18,6 @@ namespace Player
 
         public Animator playerAnimator;
 
-        [Header("ANIMATION PARAMETERS")]
-        public string moveParameterName;
 
         #endregion
 
@@ -34,13 +32,7 @@ namespace Player
 
         #region PRIVATE METHODS
 
-        private void Log()
-        {
-            if (string.IsNullOrWhiteSpace(moveParameterName))
-            {
-                Debug.LogError("PLAYER MOVE CONTROLLER : Cannot set animation walk/run parameter name.");
-            }
-        }
+    
 
         #endregion
         
@@ -62,7 +54,6 @@ namespace Player
 
         protected virtual void OnComponentAwake()
         {
-            Log();
         }
 
         protected virtual void OnComponentStart()
