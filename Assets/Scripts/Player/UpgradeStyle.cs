@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UpgradeStyle : MonoBehaviour
 {
-    [SerializeField] private LevelType[] levelTypes;
+    [SerializeField] private ClothType[] levelTypes;
     private readonly string LEVELUP_PARICLE = "LevelUp";
 
     private int currentStyle;
@@ -14,7 +14,7 @@ public class UpgradeStyle : MonoBehaviour
 
         currentStyle += index;
 
-        currentStyle = Mathf.Clamp(currentStyle, 0, levelTypes.Length-1);
+        currentStyle = Mathf.Clamp(currentStyle, 0, levelTypes.Length - 1);
 
         SetModel(currentStyle);
 
@@ -25,7 +25,7 @@ public class UpgradeStyle : MonoBehaviour
 
     public string GetStyleName()
     {
-        return levelTypes[currentStyle].name;
+        return levelTypes[currentStyle].clothData.UpgradeName;
     }
 
     public int GetStyleNumber()
@@ -37,18 +37,17 @@ public class UpgradeStyle : MonoBehaviour
     {
         for (int i = 0; i < levelTypes.Length; i++)
         {
-            levelTypes[i].Model.gameObject.SetActive(false);
+            levelTypes[i].ClothModel.gameObject.SetActive(false);
         }
 
-        levelTypes[index].Model.gameObject.SetActive(true);
+        levelTypes[index].ClothModel.gameObject.SetActive(true);
     }
 
 
     [System.Serializable]
-    public class LevelType
+    public struct ClothType
     {
-        public string name;
-        public int level;
-        public GameObject Model;
+        public ClothData clothData;
+        public GameObject ClothModel;
     }
 }

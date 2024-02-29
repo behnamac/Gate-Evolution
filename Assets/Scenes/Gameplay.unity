@@ -3382,6 +3382,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76a9a8d39a503754fae42c6d154482c5,
+        type: 2}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[0].clothData
+      value: 
+      objectReference: {fileID: 11400000, guid: 76a9a8d39a503754fae42c6d154482c5,
+        type: 2}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[1].clothData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0043781ab85b51744adb6439c26ee717,
+        type: 2}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[2].clothData
+      value: 
+      objectReference: {fileID: 11400000, guid: c77e8c0cefd1ea545b3ae4c0ceb055a2,
+        type: 2}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[3].clothData
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d6dc32ea1950ae44a6f524885c30261,
+        type: 2}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[0].ClothModel
+      value: 
+      objectReference: {fileID: 4127708517829757456}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[1].ClothModel
+      value: 
+      objectReference: {fileID: 4127708517829757458}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[2].ClothModel
+      value: 
+      objectReference: {fileID: 4127708517829757457}
+    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+        type: 3}
+      propertyPath: levelTypes.Array.data[3].ClothModel
+      value: 
+      objectReference: {fileID: 4127708517829757459}
     - target: {fileID: 5592305050517561881, guid: 1f56bb0dd3289824e80cc640e9209fc0,
         type: 3}
       propertyPath: m_Name
@@ -3401,6 +3456,30 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1f56bb0dd3289824e80cc640e9209fc0, type: 3}
+--- !u!1 &4127708517829757456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 818504838339646705, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4127708517829757455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4127708517829757457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1861529530624973693, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4127708517829757455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4127708517829757458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4958964902447402995, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4127708517829757455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4127708517829757459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8249706805581150154, guid: 1f56bb0dd3289824e80cc640e9209fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4127708517829757455}
+  m_PrefabAsset: {fileID: 0}
 --- !u!222 &4496785640605043473
 CanvasRenderer:
   m_ObjectHideFlags: 0
