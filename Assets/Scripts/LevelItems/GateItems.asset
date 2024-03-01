@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3617301fe9a824f9d735f52afe35a0, type: 3}
+  m_Name: GateItems
+  m_EditorClassIdentifier: 
+  collectiblePrefab:
+  - {fileID: 8843345730456889733, guid: 8227d7951588ae34cbfa47637bbee7e8, type: 3}
+  lineWidth: 20
+  lineLength: 135
+  offset: 0
+  distanceBetweenCollectibles: 20

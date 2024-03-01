@@ -1,84 +1,40 @@
-using System;
-using System.ComponentModel;
-using Player;
 using UnityEngine;
 
 namespace Controllers
 {
     public class CameraController : MonoBehaviour
     {
-        public static CameraController Instance { get; private set; }
+        public static CameraController Instance;
+        public Transform target;
 
+        [SerializeField] private float maxXClamp = 0.1f;
+        [SerializeField] private float SmoothFollow = 1.5f;
 
-        #region SERIALIZE FIELDS
-
-        [SerializeField] private Transform target;
-        [SerializeField] private Vector3 offset;
-        [SerializeField] private float followSpeed = 0.1f;
-        [SerializeField] private bool xPositionLock;
-        [SerializeField] private bool isTargetLook;
-
-        [Tooltip("This parameter needs to AbstractPlayerMoveController on target component!")]
-        [SerializeField] private bool setPlayerFollowSpeed;
-
-        #endregion
-
-        #region PRIVATE METHODS
-
-        private void Initialize()
-        {
-            // SET DEFAULT OFFSET
-            offset = transform.position - target.position;
-
-            // SET FOLLOW SPEED FROM TARGET
-            SetAutomaticFollowSpeed();
-        }
-
-        private void SetAutomaticFollowSpeed()
-        {
-            if (!setPlayerFollowSpeed) return;
-
-            var playerMoveController = FindObjectOfType<AbstractPlayerMoveController>();
-            if (playerMoveController == null)
-            {
-                Debug.LogError("CAMERA CONTROLLER : Cannot find AbstractPlayerMoveController on the target");
-                return;
-            }
-
-            followSpeed = playerMoveController.forwardSpeed;
-        }
-
-        private void SmoothFollow()
-        {
-            var targetPos = target.position + offset;
-
-            if (xPositionLock)
-            {
-                targetPos.x = transform.position.x;
-            }
-
-            var smoothFollow = Vector3.Lerp(transform.position, targetPos, followSpeed);
-
-            transform.position = smoothFollow;
-
-            if (!isTargetLook) return;
-
-            transform.LookAt(target);
-        }
-
-        #endregion
-
-        #region UNITY EVENT METHODS
+        private Vector3 offset;
+        private Vector3 totalOffest;
 
         private void Awake()
         {
-            if (Instance == null) Instance = this;
+            Instance = this;
         }
 
-        private void Start() => Initialize();
+        private void Start()
+        {
+            offset = transform.position - target.position;
+            totalOffest = transform.position;
+        }
 
-        private void LateUpdate() => SmoothFollow();
+        private void Follow()
+        {
+            totalOffest = target.position + offset;
+            totalOffest.x = Mathf.Clamp(totalOffest.x,-maxXClamp, maxXClamp);
+            transform.position = Vector3.Slerp(transform.position, totalOffest, SmoothFollow*Time.deltaTime);
+        }
 
-        #endregion
+        private void LateUpdate()
+        {
+            Follow();
+        }
     }
 }
+

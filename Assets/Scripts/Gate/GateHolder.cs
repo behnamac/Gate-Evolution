@@ -15,7 +15,7 @@ public class GateHolder : MonoBehaviour
 
     void SetMaterial() 
     {
-        for (int i = 0; i < childGates.Length; i++)
+     /*   for (int i = 0; i < childGates.Length; i++)
         {
             for (int j = 0; j < childGates.Length; j++)
             {
@@ -31,6 +31,6 @@ public class GateHolder : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 }

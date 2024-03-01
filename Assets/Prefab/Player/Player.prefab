@@ -592,7 +592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5592305050517561881}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.13, y: 0.18, z: -55.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -732,18 +732,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTypes:
-  - name: Neturals
-    level: 0
-    Model: {fileID: 818504838339646705}
-  - name: Wild
-    level: 1
-    Model: {fileID: 4958964902447402995}
-  - name: Dancer
-    level: 2
-    Model: {fileID: 1861529530624973693}
-  - name: Stripper
-    level: 3
-    Model: {fileID: 8249706805581150154}
+  - clothData: {fileID: 11400000, guid: 76a9a8d39a503754fae42c6d154482c5, type: 2}
+    ClothModel: {fileID: 818504838339646705}
+  - clothData: {fileID: 11400000, guid: 0043781ab85b51744adb6439c26ee717, type: 2}
+    ClothModel: {fileID: 4958964902447402995}
+  - clothData: {fileID: 11400000, guid: c77e8c0cefd1ea545b3ae4c0ceb055a2, type: 2}
+    ClothModel: {fileID: 1861529530624973693}
+  - clothData: {fileID: 11400000, guid: 2d6dc32ea1950ae44a6f524885c30261, type: 2}
+    ClothModel: {fileID: 8249706805581150154}
 --- !u!1 &9101328119398929895
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +923,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 46dc4cf329ab18c4e9ac905e949f3184, type: 2}
+      objectReference: {fileID: 2100000, guid: a96b0e62b35378a42a6f938ead1ad003, type: 2}
     - target: {fileID: 6634908373222277126, guid: e2717c346e33d964bb899005ae6ff102,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

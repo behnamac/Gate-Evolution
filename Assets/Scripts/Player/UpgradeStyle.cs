@@ -25,7 +25,7 @@ public class UpgradeStyle : MonoBehaviour
 
     public string GetStyleName()
     {
-        return levelTypes[currentStyle].clothData.UpgradeName;
+        return levelTypes[currentStyle].clothData.ClothName;
     }
 
     public int GetStyleNumber()
@@ -47,7 +47,7 @@ public class UpgradeStyle : MonoBehaviour
     [System.Serializable]
     public struct ClothType
     {
-        public ClothData clothData;
+        public SODataGate clothData;
         public GameObject ClothModel;
     }
 }

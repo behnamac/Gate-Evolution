@@ -1795,6 +1795,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1818849529}
+  - component: {fileID: 1818849530}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -1818,6 +1819,21 @@ Transform:
   - {fileID: 2484314756967380950}
   m_Father: {fileID: 2097256856}
   m_LocalEulerAnglesHint: {x: 27.587, y: 357.417, z: 0}
+--- !u!114 &1818849530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818849528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f64ed57b85e400987ea49cd4d169278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 891342119}
+  maxXClamp: 1
+  SmoothFollow: 2
 --- !u!1 &1845391470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,7 +2627,6 @@ GameObject:
   - component: {fileID: 2484314756967380945}
   - component: {fileID: 2484314756967380944}
   - component: {fileID: 2484314756967380948}
-  - component: {fileID: 2484314756967380951}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2678,24 +2693,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1818849529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2484314756967380951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2484314756967380947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f64ed57b85e400987ea49cd4d169278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 891342119}
-  offset: {x: 0, y: 0, z: 0}
-  followSpeed: 0.1
-  xPositionLock: 1
-  isTargetLook: 0
-  setPlayerFollowSpeed: 0
 --- !u!224 &2520591307625770851
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3384,59 +3381,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
         type: 3}
-      propertyPath: levelTypes.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-        type: 3}
-      propertyPath: levelTypes.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 76a9a8d39a503754fae42c6d154482c5,
-        type: 2}
-    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-        type: 3}
       propertyPath: levelTypes.Array.data[0].clothData
       value: 
-      objectReference: {fileID: 11400000, guid: 76a9a8d39a503754fae42c6d154482c5,
+      objectReference: {fileID: 11400000, guid: bba1552196723e54ba7717b3df1a896d,
         type: 2}
     - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
         type: 3}
       propertyPath: levelTypes.Array.data[1].clothData
       value: 
-      objectReference: {fileID: 11400000, guid: 0043781ab85b51744adb6439c26ee717,
+      objectReference: {fileID: 11400000, guid: 2bddbc88bb9720f4dae4de6dc20143e1,
         type: 2}
     - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
         type: 3}
       propertyPath: levelTypes.Array.data[2].clothData
       value: 
-      objectReference: {fileID: 11400000, guid: c77e8c0cefd1ea545b3ae4c0ceb055a2,
+      objectReference: {fileID: 11400000, guid: 10e9a668bd1ac26408fb7909e1be9674,
         type: 2}
     - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
         type: 3}
       propertyPath: levelTypes.Array.data[3].clothData
       value: 
-      objectReference: {fileID: 11400000, guid: 2d6dc32ea1950ae44a6f524885c30261,
+      objectReference: {fileID: 11400000, guid: 9a675f1eb7998ed429e747e1854d9509,
         type: 2}
-    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-        type: 3}
-      propertyPath: levelTypes.Array.data[0].ClothModel
-      value: 
-      objectReference: {fileID: 4127708517829757456}
-    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-        type: 3}
-      propertyPath: levelTypes.Array.data[1].ClothModel
-      value: 
-      objectReference: {fileID: 4127708517829757458}
-    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-        type: 3}
-      propertyPath: levelTypes.Array.data[2].ClothModel
-      value: 
-      objectReference: {fileID: 4127708517829757457}
-    - target: {fileID: 3645444705777322540, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-        type: 3}
-      propertyPath: levelTypes.Array.data[3].ClothModel
-      value: 
-      objectReference: {fileID: 4127708517829757459}
     - target: {fileID: 5592305050517561881, guid: 1f56bb0dd3289824e80cc640e9209fc0,
         type: 3}
       propertyPath: m_Name
@@ -3456,30 +3422,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1f56bb0dd3289824e80cc640e9209fc0, type: 3}
---- !u!1 &4127708517829757456 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 818504838339646705, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-    type: 3}
-  m_PrefabInstance: {fileID: 4127708517829757455}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4127708517829757457 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1861529530624973693, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-    type: 3}
-  m_PrefabInstance: {fileID: 4127708517829757455}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4127708517829757458 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4958964902447402995, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-    type: 3}
-  m_PrefabInstance: {fileID: 4127708517829757455}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4127708517829757459 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8249706805581150154, guid: 1f56bb0dd3289824e80cc640e9209fc0,
-    type: 3}
-  m_PrefabInstance: {fileID: 4127708517829757455}
-  m_PrefabAsset: {fileID: 0}
 --- !u!222 &4496785640605043473
 CanvasRenderer:
   m_ObjectHideFlags: 0

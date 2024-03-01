@@ -6,7 +6,7 @@ using TMPro;
 public enum GateType { Good, Bad }
 public class GateController : MonoBehaviour
 {
-    public DataGate dataGate;
+    public SODataGate dataGate;
 
     [HideInInspector] public GateType gateType;
     [Tooltip("This variable specifies the location of the item sprite")]
@@ -21,7 +21,7 @@ public class GateController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cloth = Instantiate(dataGate.spriteCloth, clothSpritePoint.position, clothSpritePoint.rotation);
+    //    cloth = Instantiate(dataGate.ClothModel, clothSpritePoint.position, clothSpritePoint.rotation);
 
        // meshs = p.GetComponentsInChildren<MeshRenderer>();
 
