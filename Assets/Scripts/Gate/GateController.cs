@@ -3,61 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public enum GateType { Good, Bad }
-public class GateController : MonoBehaviour
+
+namespace GateHolder
 {
-    public SODataGate dataGate;
-
-    [HideInInspector] public GateType gateType;
-    [Tooltip("This variable specifies the location of the item sprite")]
-    [SerializeField] Transform clothSpritePoint;
-    [Tooltip("This variable indicates the value of the item")]
-    [SerializeField] TextMeshPro itemePriceText;
-
-    [SerializeField] MeshRenderer[] panelMesh;
-    Transform cloth;
-    //public MeshRenderer[] meshs;
-
-    // Start is called before the first frame update
-    void Start()
+    public enum GateType { Good, Bad }
+    public class GateController : MonoBehaviour
     {
-    //    cloth = Instantiate(dataGate.ClothModel, clothSpritePoint.position, clothSpritePoint.rotation);
+        [SerializeField] private GateType typ = GateType.Good;
 
-       // meshs = p.GetComponentsInChildren<MeshRenderer>();
+        [SerializeField] private GameObject[] gates;
 
-       // itemePriceText.text = "$ " + (dataGate.clothPrice * GameManagerld.Instance.levelNumber);
-       // GameManagerld.OnUpgrade += SetPriceText;
-       // GameManagerld.OnReset += ResetLevel;
-    }
 
-    public void SetMaterials(Material material, GateType type)
-    {
-        foreach (var item in panelMesh)
+
+        private void Awake()
         {
-            item.material = material;
+            Initialize();
+        }
+
+
+        private void Initialize()
+        {
+            var random = DoRandom.SetRandom(0, 2);
+            if (random == 0)
+            {
+                gates[0].GetComponent<Gate>().SetGateEnum(GateType.Bad);
+                gates[1].GetComponent<Gate>().SetGateEnum(GateType.Good);
+            }
+            else
+            {
+                gates[0].GetComponent<Gate>().SetGateEnum(GateType.Good);
+                gates[1].GetComponent<Gate>().SetGateEnum(GateType.Bad);
+            }
 
         }
-        // for (int i = 0; i < meshs.Length; i++)
-        // {
-        //      meshs[i].material = material;
-        //  }
-        gateType = type;
-    }
-    
-    void SetPriceText()
-    {
-       // itemePriceText.text = "$ " + (dataGate.clothPrice * GameManagerld.Instance.levelNumber);
-    }
-
-    public void DestroyCloth() 
-    {
-        ParticleManager.PlayParticle("destroyCloth", cloth.position, Quaternion.identity);
-        Destroy(cloth.gameObject);
-    }
-
-    void ResetLevel() 
-    {
-      // GameManagerld.OnUpgrade -= SetPriceText;
-       // GameManagerld.OnReset -= ResetLevel;
     }
 }

@@ -23,7 +23,7 @@ public class ItemsSpawner : MonoBehaviour
             var SpawnPoint = levelItems[i].SpawnPoint;
             while (levelItems[i].DistanceCovered < levelItem.lineLength && levelItems[i].NumberOfCollectibles > 0)
             {
-                int _xRandom = GetRandom(0, levelItems.Length);
+                int _xRandom =DoRandom.SetRandom(0, levelItems.Length);
                 if (_xRandom == 0)
                 {
                     spawnPosition = SpawnPoint.position + transform.forward * levelItems[i].DistanceCovered;
@@ -32,7 +32,7 @@ public class ItemsSpawner : MonoBehaviour
                 {
                     spawnPosition = SpawnPoint.position + transform.forward * (levelItems[i].DistanceCovered) + transform.right * levelItem.offset;
                 }
-                int random = GetRandom(0, levelItem.collectiblePrefab.Length);
+                int random = DoRandom.SetRandom(0, levelItem.collectiblePrefab.Length);
 
                 var spawnRotation = levelItems[i].SpawnPoint.rotation;
                 Instantiate(levelItem.collectiblePrefab[random], spawnPosition, spawnRotation, SpawnPoint);
@@ -45,10 +45,7 @@ public class ItemsSpawner : MonoBehaviour
     }
 
 
-    private int GetRandom(int min, int max)
-    {
-        return Random.Range(min, max);
-    }
+
 
     [System.Serializable]
     public struct LevelItems
