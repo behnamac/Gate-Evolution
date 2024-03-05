@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishLine : MonoBehaviour, ITriggerable
+namespace Collectables
 {
-    public void TriggerAction()
+    public class FinishLine : MonoBehaviour, ITriggerable
     {
-        GameManager.Instance.OnReachToFInishLine?.Invoke();
-    }    
+        public void TriggerAction()
+        {
+            GameManager.Instance.OnReachToFInishLine?.Invoke();
+        }    
+    }
 }

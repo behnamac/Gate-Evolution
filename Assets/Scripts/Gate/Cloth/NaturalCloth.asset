@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: NaturalCloth
   m_EditorClassIdentifier: 
   ClothName: Natural
-  Model: []
+  Model:
+  - {fileID: 2093427335925734778, guid: aa61eb08bebaf440faf24c252636cc59, type: 3}
+  - {fileID: 8753720430182435554, guid: fb990be1541e24d009f896b5d6c52cab, type: 3}
+  - {fileID: 8284982404169081965, guid: 37bc7ef76f6c3413e9a1a49133848540, type: 3}
   Level: 0
   MinPrice: 10
   MaxPrice: 20

@@ -1,36 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
+using Collectables;
+using Gate.Cloth;
+using TMPro;
 using UnityEngine;
 
-namespace GateHolder
+namespace Gate
 {
     public class Gate : MonoBehaviour, ITriggerable
     {
-        private GateType type;
-        private MeshRenderer meshRenderer;
+        [SerializeField] private TextMeshProUGUI gatePrice;
+        private GateType _type;
+        private MeshRenderer _meshRenderer;
 
 
-        private void Start ()
+   
+        public void SetGateEnum(GateType gateType)
         {
-            meshRenderer = GetComponentInChildren<MeshRenderer>();
-            if(type==GateType.Good)
+            _type = gateType;
+        }
+
+        public void SetGateColor()
+        {
+            _meshRenderer = GetComponentInChildren<MeshRenderer>();
+            if (_type == GateType.Good)
             {
-                meshRenderer.material.color = Color.green;
+                _meshRenderer.material.color = Color.green;
             }
             else
             {
-                meshRenderer.material.color = Color.red;
+                _meshRenderer.material.color = Color.red;
             }
         }
 
-        public void SetGateEnum(GateType gateType)
+        public void SetGatePrice(SoDataGate price)
         {
-            type = gateType;
+            gatePrice.text = price.ToString();
         }
+
 
         public void TriggerAction()
         {
             throw new System.NotImplementedException();
         }
+
+     
     }
 }

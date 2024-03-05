@@ -1,61 +1,66 @@
+using Tools;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ItemsSpawner : MonoBehaviour
+namespace Collectables
 {
-
-    [SerializeField] private LevelItems[] levelItems;
-
-    private Vector3 spawnPosition;
-    private Vector3 spawnRotation;
-
-    private void OnEnable()
-    {
-        SpawnCollectibles();
-    }
-
-
-    void SpawnCollectibles()
+    public class ItemsSpawner : MonoBehaviour
     {
 
-        for (int i = 0; i < levelItems.Length; i++)
+        [SerializeField] private LevelItems[] levelItems;
+
+        private Vector3 _spawnPosition;
+        private Vector3 _spawnRotation;
+
+        private void OnEnable()
         {
-            var levelItem = levelItems[i].SolevelItems;
-            var SpawnPoint = levelItems[i].SpawnPoint;
-            while (levelItems[i].DistanceCovered < levelItem.lineLength && levelItems[i].NumberOfCollectibles > 0)
+            SpawnCollectibles();
+        }
+
+
+        void SpawnCollectibles()
+        {
+
+            for (int i = 0; i < levelItems.Length; i++)
             {
-                int _xRandom =DoRandom.SetRandom(0, levelItems.Length);
-                if (_xRandom == 0)
+                var levelItem = levelItems[i].solevelItems;
+                var spawnPoint = levelItems[i].spawnPoint;
+                while (levelItems[i].distanceCovered < levelItem.lineLength && levelItems[i].numberOfCollectibles > 0)
                 {
-                    spawnPosition = SpawnPoint.position + transform.forward * levelItems[i].DistanceCovered;
+                    int xRandom =DoRandom.SetRandom(0, levelItems.Length);
+                    if (xRandom == 0)
+                    {
+                        _spawnPosition = spawnPoint.position + transform.forward * levelItems[i].distanceCovered;
+                    }
+                    else
+                    {
+                        _spawnPosition = spawnPoint.position + transform.forward * (levelItems[i].distanceCovered) + transform.right * levelItem.offset;
+                    }
+                    int random = DoRandom.SetRandom(0, levelItem.collectiblePrefab.Length);
+
+                    var spawnRotation = levelItems[i].spawnPoint.rotation;
+                    Instantiate(levelItem.collectiblePrefab[random], _spawnPosition, spawnRotation, spawnPoint);
+
+                    levelItems[i].distanceCovered += levelItem.distanceBetweenCollectibles;
+
+                    levelItems[i].numberOfCollectibles--;
                 }
-                else
-                {
-                    spawnPosition = SpawnPoint.position + transform.forward * (levelItems[i].DistanceCovered) + transform.right * levelItem.offset;
-                }
-                int random = DoRandom.SetRandom(0, levelItem.collectiblePrefab.Length);
-
-                var spawnRotation = levelItems[i].SpawnPoint.rotation;
-                Instantiate(levelItem.collectiblePrefab[random], spawnPosition, spawnRotation, SpawnPoint);
-
-                levelItems[i].DistanceCovered += levelItem.distanceBetweenCollectibles;
-
-                levelItems[i].NumberOfCollectibles--;
             }
         }
-    }
 
 
 
 
-    [System.Serializable]
-    public struct LevelItems
-    {
-        public string Name;
-        public SOLevelItems SolevelItems;
-        public int NumberOfCollectibles;
-        public float DistanceCovered;
-        public Transform SpawnPoint;
+        [System.Serializable]
+        public struct LevelItems
+        {
+            [FormerlySerializedAs("Name")] public string name;
+            [FormerlySerializedAs("SolevelItems")] public SOLevelItems solevelItems;
+            [FormerlySerializedAs("NumberOfCollectibles")] public int numberOfCollectibles;
+            [FormerlySerializedAs("DistanceCovered")] public float distanceCovered;
+            [FormerlySerializedAs("SpawnPoint")] public Transform spawnPoint;
 
+        }
     }
 }
 

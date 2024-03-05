@@ -1,5 +1,8 @@
 
-public interface ITriggerable 
+namespace Collectables
 {
-    void TriggerAction(); 
+    public interface ITriggerable 
+    {
+        void TriggerAction(); 
+    }
 }

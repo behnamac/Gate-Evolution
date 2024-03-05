@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: StripperCloth
   m_EditorClassIdentifier: 
   ClothName: Stripper
-  Model: []
+  Model:
+  - {fileID: 4867058462233753359, guid: 2591917b8ecbd470980cdabd210a05c7, type: 3}
+  - {fileID: 6954406452054399133, guid: 2fa32ad8d66c2bd45b3f12fec28270f0, type: 3}
+  - {fileID: 988971933559298753, guid: 180403debf0d5457990405acb7910518, type: 3}
   Level: 3
   MinPrice: 40
   MaxPrice: 50

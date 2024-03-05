@@ -1,30 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleManager : MonoBehaviour
+namespace Tools
 {
-    public static ParticleManager instance;
-    public ParticleData[] particleData;
-    Dictionary<string, ParticleData> particleDic;
-    private void Awake()
+    public class ParticleManager : MonoBehaviour
     {
-        instance = this;
-        particleDic = new Dictionary<string, ParticleData>();
-        for (int i = 0; i < particleData.Length; i++)
+        public static ParticleManager instance;
+        public ParticleData[] particleData;
+        Dictionary<string, ParticleData> _particleDic;
+        private void Awake()
         {
-            particleDic.Add(particleData[i].name, particleData[i]);
+            instance = this;
+            _particleDic = new Dictionary<string, ParticleData>();
+            for (int i = 0; i < particleData.Length; i++)
+            {
+                _particleDic.Add(particleData[i].name, particleData[i]);
+            }
+        }
+
+        public static void PlayParticle(string n, Vector3 pos, Quaternion rot)
+        {
+            Instantiate(instance._particleDic[n].particleObj[Random.Range(0, instance._particleDic[n].particleObj.Length - 1)], pos, rot);
         }
     }
-
-    public static void PlayParticle(string n, Vector3 pos, Quaternion Rot)
+    [System.Serializable]
+    public class ParticleData 
     {
-        Instantiate(instance.particleDic[n].particleObj[Random.Range(0, instance.particleDic[n].particleObj.Length - 1)], pos, Rot);
+        public string name;
+        public Transform[] particleObj;
     }
-}
-[System.Serializable]
-public class ParticleData 
-{
-    public string name;
-    public Transform[] particleObj;
 }

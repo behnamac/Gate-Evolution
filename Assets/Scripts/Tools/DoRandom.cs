@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public static class DoRandom
+namespace Tools
 {
-    public static int SetRandom(int a,int b)
+    public static class DoRandom
     {
-        return Random.Range(a,b);
-    }
+        public static int SetRandom(int a,int b)
+        {
+            return Random.Range(a,b);
+        }
 
-    public static float SetRandom(float a, float b)
-    {
-        return Random.Range(a, b);
-    }
+        public static float SetRandom(float a, float b)
+        {
+            return Random.Range(a, b);
+        }
 
+    }
 }

@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class Collectable : MonoBehaviour, ITriggerable
+namespace Collectables
 {
-    [SerializeField] private float scoreToGain=0.2f;
-
-
-    public void TriggerAction()
+    public class Collectable : MonoBehaviour, ITriggerable
     {
-        GameManager.Instance.OnCollect?.Invoke(scoreToGain);
-        Destroy(gameObject);
+        [SerializeField] private float scoreToGain=0.2f;
+
+
+        public void TriggerAction()
+        {
+            GameManager.Instance.OnCollect?.Invoke(scoreToGain);
+            Destroy(gameObject);
+        }
     }
 }

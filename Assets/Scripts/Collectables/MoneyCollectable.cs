@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class MoneyCollectable :MonoBehaviour, ITriggerable
+namespace Collectables
 {
-    [SerializeField] private int moneyToGain;
-    public void TriggerAction()
+    public class MoneyCollectable :MonoBehaviour, ITriggerable
     {
-        MoneyController.Instance.SetCoin(moneyToGain);
-        Destroy(gameObject);
+        [SerializeField] private int moneyToGain;
+        public void TriggerAction()
+        {
+            MoneyController.Instance.SetCoin(moneyToGain);
+            Destroy(gameObject);
+        }
     }
 }

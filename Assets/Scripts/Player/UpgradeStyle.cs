@@ -1,3 +1,5 @@
+using Gate.Cloth;
+using Tools;
 using UnityEngine;
 
 public class UpgradeStyle : MonoBehaviour
@@ -25,7 +27,7 @@ public class UpgradeStyle : MonoBehaviour
 
     public string GetStyleName()
     {
-        return levelTypes[currentStyle].clothData.ClothName;
+        return levelTypes[currentStyle].clothData.clothName;
     }
 
     public int GetStyleNumber()
@@ -47,7 +49,7 @@ public class UpgradeStyle : MonoBehaviour
     [System.Serializable]
     public struct ClothType
     {
-        public SODataGate clothData;
+        public SoDataGate clothData;
         public GameObject ClothModel;
     }
 }

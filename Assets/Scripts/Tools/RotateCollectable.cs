@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
-public class RotateCollectable : MonoBehaviour
+namespace Tools
 {
-
-    [SerializeField] float rotationDuration = 1f;
-    private Vector3 rotationAmount = new Vector3(0, 360, 0);
-    private LoopType loopType = LoopType.Restart;
-
-
-    private void Start()
+    public class RotateCollectable : MonoBehaviour
     {
-        RotateObject();
-    }
 
-    private void RotateObject()
-    {
-        // Rotate the object infinitely
-        transform.DORotate(rotationAmount, rotationDuration, RotateMode.FastBeyond360)
-                 .SetLoops(-1, loopType).SetEase(Ease.Linear);
+        [SerializeField] float rotationDuration = 1f;
+        private readonly Vector3 _rotationAmount = new Vector3(0, 360, 0);
+        private readonly LoopType loopType = LoopType.Restart;
+
+
+        private void Start()
+        {
+            RotateObject();
+        }
+
+        private void RotateObject()
+        {
+            // Rotate the object infinitely
+            transform.DORotate(_rotationAmount, rotationDuration, RotateMode.FastBeyond360)
+                .SetLoops(-1, loopType).SetEase(Ease.Linear);
+        }
     }
 }

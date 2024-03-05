@@ -14,11 +14,11 @@ namespace Player
         private bool _isHorizontalMoveLock;
         private float _mouseXStartPosition;
         private float _swipeDelta;
-        private float firstXPos;
-        private readonly string MOVE_PARAM = "Move";
-        private readonly string DANCE_PARAM = "Dance";
-        private readonly string SPIN_PARAM = "Spine";
-        private readonly string RANDOM_DANCE_PARAM = "RandomDance";
+        private float _firstXPos;
+        private const string MOVE_PARAM = "Move";
+        private const string DANCE_PARAM = "Dance";
+        private const string SPIN_PARAM = "Spine";
+        private const string RANDOM_DANCE_PARAM = "RandomDance";
 
 
 
@@ -28,7 +28,7 @@ namespace Player
 
         private void Move()
         {
-            transform.position += transform.forward * Time.deltaTime * forwardSpeed;
+            transform.position += transform.forward * (Time.deltaTime * forwardSpeed);
         }
 
         private void WinDance()
@@ -52,7 +52,7 @@ namespace Player
         private IEnumerator GoToCenterLineCO()
         {          
             yield return new WaitForEndOfFrame();
-            transform.DOMoveX(firstXPos, 2);
+            transform.DOMoveX(_firstXPos, 2);
             forwardSpeed *= 2;
             _isHorizontalMoveLock = true;
         }
@@ -88,7 +88,7 @@ namespace Player
             _isMove = true;
 
             playerAnimator.SetBool(MOVE_PARAM, true);
-            firstXPos = transform.position.x;
+            _firstXPos = transform.position.x;
         }
 
         public override void StopRun()

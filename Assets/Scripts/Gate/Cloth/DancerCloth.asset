@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: DancerCloth
   m_EditorClassIdentifier: 
   ClothName: Dancer
-  Model: []
+  Model:
+  - {fileID: 4273805282627327822, guid: 58a80d9484fe94b07b5b16c5b135a370, type: 3}
+  - {fileID: 6496993944595288431, guid: 9a1b9bf90ac7a43d8b61db69636a0b10, type: 3}
+  - {fileID: 3293300142256510884, guid: b667d809a2375466bbcd658e955fb84d, type: 3}
   Level: 2
   MinPrice: 30
   MaxPrice: 40

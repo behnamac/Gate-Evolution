@@ -1,4 +1,5 @@
 using System;
+using Collectables;
 using UnityEngine;
 
 namespace Player

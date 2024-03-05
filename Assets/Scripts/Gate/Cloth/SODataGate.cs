@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-
-[CreateAssetMenu(fileName ="gate", menuName = "GameData/Gate")]
-public class SODataGate : ScriptableObject
+namespace Gate.Cloth
 {
-    public string ClothName;
+    [CreateAssetMenu(fileName ="gate", menuName = "GameData/Gate")]
+    public class SoDataGate : ScriptableObject
+    {
+        [FormerlySerializedAs("ClothName")] public string clothName;
 
-    public Transform[] Model;
+        [FormerlySerializedAs("Model")] public Transform[] model;
 
-    public int Level;
+        [FormerlySerializedAs("Level")] public int level;
 
-    public int MinPrice,MaxPrice;
+        public int MinPrice,MaxPrice;
+    }
 }

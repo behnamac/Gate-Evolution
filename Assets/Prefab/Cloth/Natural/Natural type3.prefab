@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3138066502614008091}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.5284954, y: 0.46977946, z: 0.52849454, w: -0.46978018}
   m_LocalPosition: {x: 0.53809273, y: 20.494314, z: -0.0012604541}
   m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8284982404169081965}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3445549454237788815
 MeshFilter:
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -59,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d855dda6eeef41689d2e7a3ca578b86, type: 2}
+  - {fileID: 2100000, guid: a96b0e62b35378a42a6f938ead1ad003, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,12 +106,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5616739023475221373}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7052671, y: -0.050974075, z: 0.050974075, w: 0.7052671}
   m_LocalPosition: {x: 1.2442852, y: 27.347666, z: -0.00000093605723}
   m_LocalScale: {x: 0.9999999, y: 1, z: 0.9999999}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8284982404169081965}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8769066155733974743
 GameObject:
@@ -122,7 +125,7 @@ GameObject:
   - component: {fileID: 8284982404169081965}
   - component: {fileID: -2077450423015378578}
   m_Layer: 0
-  m_Name: Lu_TBlouse_003
+  m_Name: Natural type3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,14 +138,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8769066155733974743}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7486628059021362443}
   - {fileID: 5251797339385802745}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2077450423015378578
 MonoBehaviour:
@@ -156,5 +160,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018855b0359b74abaaa72c3de264955a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleToRotate: {x: 0, y: 360, z: 0}
-  speed: 0.3
+  rotationDuration: 1
